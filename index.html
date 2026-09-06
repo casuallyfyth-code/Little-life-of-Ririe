@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>my little life os 🌿</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Quicksand:wght@400;500;600;700&display=swap');
+  :root{
+    --cream:#FBF6EE; --sage:#8FA681; --sage-dark:#5F7350;
+    --rose:#D9A5A0; --butter:#EFC873; --sky:#A7C4C2;
+    --brown:#6B4E3D; --line:#E4D9C4;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:radial-gradient(circle at 10% 8%, rgba(217,165,160,.15), transparent 40%),radial-gradient(circle at 90% 12%, rgba(143,166,129,.15), transparent 40%),var(--cream);font-family:'Quicksand',sans-serif;color:var(--brown);padding:26px 14px 70px;}
+  .wrap{max-width:520px;margin:0 auto;}
+  header{text-align:center;margin-bottom:20px;}
+  header .sprig{font-size:26px;display:block;margin-bottom:4px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.8rem;margin:0;color:var(--sage-dark);}
+  header p{font-style:italic;font-family:'Fraunces',serif;color:var(--rose);margin-top:5px;font-size:.88rem;}
+
+  /* clock */
+  .clockcard{background:#FFFDF8;border:1px solid var(--line);border-radius:20px;padding:16px;text-align:center;margin-bottom:18px;box-shadow:0 3px 0 var(--line);}
+  .clock-time{font-family:'Fraunces',serif;font-weight:600;font-size:2rem;color:var(--sage-dark);letter-spacing:1px;}
+  .clock-date{font-size:.78rem;color:#9a8b78;font-style:italic;margin-top:2px;}
+  .clock-ring{width:64px;height:64px;margin:6px auto 4px;position:relative;}
+
+  section{margin-bottom:18px;background:#FFFDF8;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 3px 0 var(--line);}
+  section h2{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;margin:0 0 8px;color:var(--sage-dark);}
+  .tag{display:inline-block;color:#fff;font-size:.63rem;padding:3px 9px;border-radius:20px;margin-bottom:8px;font-weight:600;}
+  .tag.school{background:var(--sky);} .tag.food{background:var(--rose);}
+  .tag.habit{background:var(--sage);} .tag.org{background:var(--butter);color:var(--brown);}
+  .tag.biz{background:#C9A66B;} .tag.wellness{background:var(--sage-dark);}
+  .tag.misc{background:#B7AFC7;} .tag.money{background:#B98C6B;}
+
+  .task{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dotted var(--line);flex-wrap:wrap;}
+  .task:last-child{border-bottom:none;}
+  .task input[type=checkbox]{width:19px;height:19px;accent-color:var(--sage);flex-shrink:0;}
+  .task .txt{flex:1;font-size:.9rem;min-width:120px;}
+  .task .txt .due{display:block;font-size:.68rem;color:var(--rose);font-weight:600;}
+  .task .txt .meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;}
+  .badge{font-size:.63rem;padding:2px 7px;border-radius:10px;font-weight:700;}
+  .badge.easy{background:#DDEBD3;color:#3d5c2b;}
+  .badge.medium{background:#FCEBC0;color:#7a5c12;}
+  .badge.hard{background:#F4D2CE;color:#8a2f28;}
+  .badge.subject{background:var(--sky);color:#1c3634;}
+  .badge.type{background:#E4D9C4;color:var(--brown);}
+  .badge.expense{background:var(--butter);color:var(--brown);}
+  .task span.done{text-decoration:line-through;color:#b3a48c;}
+  .del{background:none;border:none;color:var(--rose);font-size:1.1rem;cursor:pointer;padding:0 4px;}
+
+  .addrow{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center;}
+  .addrow input[type=text]{flex:1;min-width:120px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-family:'Quicksand';font-size:.85rem;background:#fff;}
+  .addrow input[type=date]{border:1px solid var(--line);border-radius:10px;padding:8px 8px;font-family:'Quicksand';font-size:.78rem;background:#fff;color:var(--brown);}
+  .addrow select{border:1px solid var(--line);border-radius:10px;padding:7px 6px;font-family:'Quicksand';font-size:.78rem;background:#fff;color:var(--brown);}
+  .addrow input[type=number]{width:70px;border:1px solid var(--line);border-radius:10px;padding:7px 8px;font-size:.8rem;}
+  .addrow button{background:var(--sage);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:.85rem;}
+  .exprow{display:flex;align-items:center;gap:5px;font-size:.72rem;color:#9a8b78;background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px 8px;}
+
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;text-align:center;flex:1;min-width:70px;}
+  .stat .num{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--sage-dark);display:block;}
+  .stat .lbl{font-size:.63rem;color:#9a8b78;}
+  .navpill{background:var(--sage);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:14px;text-decoration:none;font-weight:600;}
+
+  .wellrow{display:flex;flex-direction:column;gap:8px;margin-bottom:8px;}
+  .wellrow label{font-size:.78rem;color:#9a8b78;}
+  .wellrow input[type=number],.wellrow input[type=text]{border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-family:'Quicksand';font-size:.88rem;}
+  textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;font-family:'Quicksand';font-size:.85rem;min-height:70px;resize:vertical;background:#fff9ef;}
+
+  .calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .calhead button{background:var(--sky);border:none;color:#28403e;border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer;}
+  .calhead span{font-family:'Fraunces',serif;font-weight:600;color:var(--sage-dark);}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .calgrid .dow{font-size:.62rem;text-align:center;color:#9a8b78;font-weight:700;padding-bottom:4px;}
+  .calday{aspect-ratio:1;border-radius:10px;border:1px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.75rem;cursor:pointer;position:relative;}
+  .calday.empty{border:none;background:transparent;cursor:default;}
+  .calday.today{border:2px solid var(--sage);font-weight:700;}
+  .calday.selected{background:var(--sage);color:#fff;}
+  .calday .dots{display:flex;gap:2px;margin-top:2px;}
+  .calday .dot{width:5px;height:5px;border-radius:50%;}
+  .dot.w{background:var(--rose);} .dot.t{background:var(--butter);} .dot.s{background:var(--sky);}
+
+  .daypanel{margin-top:12px;background:#F6F9F2;border:1px solid var(--sage);border-radius:14px;padding:12px;}
+  .daypanel h3{font-family:'Fraunces',serif;font-size:.95rem;margin:0 0 8px;color:var(--sage-dark);}
+
+  .soft-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dotted var(--line);flex-wrap:wrap;}
+  .soft-item:last-child{border-bottom:none;}
+  .soft-item input[type=checkbox]{width:19px;height:19px;accent-color:var(--sage);flex-shrink:0;}
+  .soft-item .lbl2{flex:1;font-size:.87rem;min-width:140px;}
+  .soft-item input[type=number]{width:60px;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font-size:.8rem;}
+  .soft-item .unit{font-size:.72rem;color:#9a8b78;}
+  .subgroup{margin-top:6px;}
+  .subgroup .grouplabel{font-size:.75rem;color:#9a8b78;font-weight:600;margin:8px 0 2px;}
+  .pillrow{display:flex;gap:6px;flex-wrap:wrap;}
+  .pillcheck{display:flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px 8px;font-size:.75rem;}
+
+  .budgetgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+  .budgetbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;}
+  .budgetbox label{font-size:.72rem;color:#9a8b78;display:block;margin-bottom:4px;}
+  .budgetbox input{width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:.85rem;}
+  .periodtabs{display:flex;gap:6px;margin:10px 0;}
+  .periodtab{background:#fff;border:1px solid var(--line);border-radius:10px;padding:5px 10px;font-size:.75rem;cursor:pointer;font-weight:600;color:#9a8b78;}
+  .periodtab.active{background:var(--sage);color:#fff;border-color:var(--sage);}
+  .expenselist{margin-top:10px;}
+  .expenseitem{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted var(--line);font-size:.82rem;}
+  .expenseitem:last-child{border-bottom:none;}
+  .expenseitem .exsec{font-size:.65rem;color:#9a8b78;}
+
+  footer{text-align:center;margin-top:30px;font-family:'Fraunces',serif;font-style:italic;color:var(--rose);font-size:.85rem;}
+
+  @media (min-width:900px){
+    body{padding:36px 24px 90px;}
+    .wrap{max-width:1100px;}
+    #maingrid{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
+    #leftcol, #rightcol{display:flex;flex-direction:column;}
+    #lists{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    #lists section{margin-bottom:0;}
+  }
+  @media (min-width:1300px){ #lists{grid-template-columns:1fr 1fr 1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="sprig">🌿🍄🌾</span>
+    <h1>my little life os</h1>
+    <p>a soft little system for a whole life 🌾</p>
+  </header>
+
+  <div class="clockcard">
+    <svg class="clock-ring" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#E4D9C4" stroke-width="4"/>
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#8FA681" stroke-width="4" stroke-linecap="round" id="clock-progress" stroke-dasharray="289" stroke-dashoffset="289" transform="rotate(-90 50 50)"/>
+      <text x="50" y="56" text-anchor="middle" font-size="22" id="clock-emoji">🌸</text>
+    </svg>
+    <div class="clock-time" id="clock-time">--:--</div>
+    <div class="clock-date" id="clock-date">loading...</div>
+  </div>
+
+  <div id="maingrid">
+    <div id="leftcol">
+      <section style="background:linear-gradient(135deg,#F6F9F2,#FDF3E7);border:1.5px solid var(--sage);">
+        <span class="tag habit">dashboard</span>
+        <h2>🌤️ Today at a Glance</h2>
+        <div id="dash-stats" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;"></div>
+        <div id="dash-nav" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;"></div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="exportData()" style="background:var(--butter);color:var(--brown);border:none;border-radius:10px;padding:7px 14px;font-weight:700;cursor:pointer;font-size:.78rem;">⬇️ Export</button>
+          <label style="background:var(--sky);color:#28403e;border-radius:10px;padding:7px 14px;font-weight:700;cursor:pointer;font-size:.78rem;">
+            ⬆️ Import<input type="file" accept=".json" onchange="importData(event)" style="display:none;">
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <span class="tag wellness">calendar</span>
+        <h2>🗓️ Progress Calendar</h2>
+        <div class="calhead">
+          <button onclick="changeMonth(-1)">‹</button>
+          <span id="cal-label"></span>
+          <button onclick="changeMonth(1)">›</button>
+        </div>
+        <div class="calgrid" id="cal-grid"></div>
+        <div style="font-size:.65rem;color:#9a8b78;margin-top:6px;">🌸 rose = wellness · 💛 butter = task due · 💙 sky = 75 Soft</div>
+        <div id="daypanel"></div>
+      </section>
+
+      <section>
+        <span class="tag misc">quick capture</span>
+        <h2>🍂 Braindump</h2>
+        <textarea id="inbox" placeholder="anything on your mind..."></textarea>
+      </section>
+    </div>
+
+    <div id="rightcol">
+      <section id="sec-soft75">
+        <span class="tag habit">gentle habits · resets daily</span>
+        <h2>🌷 75 Soft — <span id="soft-date"></span></h2>
+        <div id="soft-list"></div>
+      </section>
+
+      <section id="sec-academic">
+        <span class="tag school">school</span>
+        <h2>📖 Academic</h2>
+        <div id="acad-timeline" style="margin-bottom:10px;"></div>
+        <div id="list-academic"></div>
+        <div class="addrow">
+          <input type="text" id="acad-subject" list="subject-options" placeholder="Subject">
+          <datalist id="subject-options">
+            <option value="Financial Accounting"><option value="Cost Accounting">
+            <option value="Auditing"><option value="Taxation"><option value="Management Accounting">
+          </datalist>
+          <input type="text" id="acad-task" placeholder="task / topic...">
+        </div>
+        <div class="addrow">
+          <input type="date" id="acad-deadline">
+          <select id="acad-difficulty"><option value="">difficulty</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select>
+          <select id="acad-type"><option value="">type</option><option value="Assignment">Assignment</option><option value="Exam">Exam</option><option value="Quiz">Quiz</option><option value="Revision Day">Revision Day</option><option value="Reading">Reading</option><option value="Project">Project</option></select>
+          <button onclick="addAcademic()">Add</button>
+        </div>
+      </section>
+
+      <section id="sec-mealplan">
+        <span class="tag food">meals</span>
+        <h2>🍓 Meal Planning</h2>
+        <div class="calhead">
+          <button onclick="changeMealWeek(-1)">‹</button>
+          <span id="mealweek-label"></span>
+          <button onclick="changeMealWeek(1)">›</button>
+        </div>
+        <div id="mealplan-grid"></div>
+        <div style="margin-top:12px;">
+          <div class="grouplabel" style="font-size:.8rem;color:var(--sage-dark);font-weight:700;margin-bottom:4px;">🍪 Snack Log</div>
+          <textarea id="snacklog" placeholder="what I snacked on this week..."></textarea>
+        </div>
+      </section>
+
+      <div id="lists"></div>
+
+      <section id="sec-investment">
+        <span class="tag biz">investment</span>
+        <h2>🌻 Investment</h2>
+        <div id="inv-summary" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;"></div>
+
+        <div class="grouplabel" style="font-size:.8rem;color:var(--sage-dark);font-weight:700;margin-bottom:6px;">🏦 Savings / High-Yield Platforms</div>
+        <div id="platform-list"></div>
+        <div class="addrow">
+          <input type="text" id="platform-name" placeholder="platform name (e.g. CIMB)">
+          <input type="number" id="platform-rate" placeholder="interest rate %" step="0.01">
+        </div>
+        <div class="addrow">
+          <select id="platform-freq"><option value="yearly">per year</option><option value="monthly">per month</option></select>
+          <input type="number" id="platform-amount" placeholder="₱ starting amount (optional)">
+          <button onclick="addPlatform()">Add</button>
+        </div>
+
+        <div class="grouplabel" style="font-size:.8rem;color:var(--sage-dark);font-weight:700;margin:16px 0 6px;border-top:1px dashed var(--line);padding-top:12px;">📈 Portfolio Holdings <span style="font-size:.68rem;color:#9a8b78;">(grow in value)</span></div>
+        <div id="holdings-list"></div>
+        <div class="addrow">
+          <input type="text" id="holding-asset" placeholder="asset name (e.g. BPI Equity Fund)">
+          <select id="holding-type"><option>Stocks</option><option>Mutual Fund</option><option>Crypto</option><option>Bonds</option><option>Gold/Commodities</option><option>Time Deposit</option><option>Other</option></select>
+        </div>
+        <div class="addrow">
+          <input type="number" id="holding-invested" placeholder="₱ amount invested">
+          <input type="number" id="holding-current" placeholder="₱ current value">
+          <button onclick="addHolding()">Add</button>
+        </div>
+
+        <div class="grouplabel" style="font-size:.8rem;color:var(--sage-dark);font-weight:700;margin:16px 0 6px;border-top:1px dashed var(--line);padding-top:12px;">📉 Depreciating Assets <span style="font-size:.68rem;color:#9a8b78;">(lose value over time — laptop, phone, gadgets, etc.)</span></div>
+        <div id="assets-list"></div>
+        <div class="addrow">
+          <input type="text" id="asset-name" placeholder="asset name (e.g. MacBook Air)">
+          <input type="date" id="asset-purchase-date">
+        </div>
+        <div class="addrow">
+          <input type="number" id="asset-purchase-price" placeholder="₱ purchase price">
+          <input type="number" id="asset-current-value" placeholder="₱ current est. value">
+          <button onclick="addAsset()">Add</button>
+        </div>
+      </section>
+
+      <section id="sec-inventory">
+        <span class="tag misc">inventory</span>
+        <h2>📦 Inventory</h2>
+        <div style="font-size:.75rem;color:#9a8b78;font-style:italic;margin-bottom:10px;">🔗 money totals below are the same numbers as your Money & Investment sections — nothing separate to keep in sync</div>
+
+        <div class="periodtabs">
+          <div class="periodtab active" data-invperiod="week" onclick="setInvPeriod('week')">Week</div>
+          <div class="periodtab" data-invperiod="month" onclick="setInvPeriod('month')">Month</div>
+          <div class="periodtab" data-invperiod="year" onclick="setInvPeriod('year')">Year</div>
+        </div>
+        <div id="inv-ledger-summary" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;"></div>
+        <div class="addrow">
+          <input type="text" id="income-label" placeholder="income source (e.g. allowance)">
+          <select id="income-category"><option>Academic</option><option>Business</option><option>Food</option><option>Personal</option><option>Other</option></select>
+        </div>
+        <div class="addrow">
+          <input type="number" id="income-amount" placeholder="₱ amount">
+          <button onclick="addIncome()">💵 Add Income</button>
+        </div>
+        <div id="inv-category-breakdown" style="margin-top:10px;"></div>
+        <div class="expenselist" id="inv-full-ledger" style="margin-top:10px;max-height:220px;overflow-y:auto;"></div>
+
+        <div class="grouplabel" style="font-size:.8rem;color:var(--sage-dark);font-weight:700;margin:16px 0 6px;border-top:1px dashed var(--line);padding-top:12px;">🧺 Items in Stock <span style="font-size:.68rem;color:#9a8b78;">— what you bought & how much is left</span></div>
+        <div id="stock-list"></div>
+        <div class="addrow">
+          <input type="text" id="stock-name" placeholder="item name (e.g. rice, printer paper)">
+          <select id="stock-category"><option>Food</option><option>Academic</option><option>Business</option><option>Other</option></select>
+        </div>
+        <div class="addrow">
+          <input type="number" id="stock-qty" placeholder="quantity bought">
+          <input type="text" id="stock-unit" placeholder="unit (kg, pcs, reams)">
+          <input type="number" id="stock-price" placeholder="₱ price (optional)">
+          <button onclick="addStockItem()">Add Item</button>
+        </div>
+      </section>
+
+      <section id="sec-money">
+        <span class="tag money">money</span>
+        <h2>🍯 Budget</h2>
+        <div class="budgetgrid">
+          <div class="budgetbox"><label>Weekly budget (₱)</label><input type="number" id="budget-weekly" value="2500"></div>
+          <div class="budgetbox"><label>Savings goal (₱)</label><input type="number" id="budget-goal" value="1000"></div>
+        </div>
+        <div class="addrow">
+          <input type="number" id="save-amount" placeholder="add to savings ₱">
+          <select id="save-platform"><option value="">General (no platform)</option></select>
+          <button onclick="addSaving()">💰 Save</button>
+        </div>
+        <div class="periodtabs">
+          <div class="periodtab active" data-period="week" onclick="setPeriod('week')">Week</div>
+          <div class="periodtab" data-period="month" onclick="setPeriod('month')">Month</div>
+          <div class="periodtab" data-period="year" onclick="setPeriod('year')">Year</div>
+        </div>
+        <div id="budget-stats" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
+        <div class="expenselist" id="expense-list"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer>grow a little every day 🌱</footer>
+</div>
+
+<script>
+const sections = [
+  {id:'art', tag:'misc', title:'🎨 Art Practice'},
+  {id:'orgs', tag:'org', title:'🎀 School Organizations'},
+  {id:'business', tag:'biz', title:'💼 Business'},
+  {id:'therapy', tag:'wellness', title:'🌙 Therapy / Psych'},
+  {id:'misc', tag:'misc', title:'🧺 Miscellaneous'},
+];
+
+function todayStr(){
+  const now = new Date();
+  return new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Manila', year:'numeric', month:'2-digit', day:'2-digit'}).format(now);
+}
+function pad(n){ return String(n).padStart(2,'0'); }
+
+// ---- clock ----
+function updateClock(){
+  const now = new Date();
+  const phParts = new Intl.DateTimeFormat('en-US', {
+    timeZone:'Asia/Manila', hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true,
+    weekday:'long', month:'short', day:'numeric'
+  }).formatToParts(now);
+  const get = t => phParts.find(p=>p.type===t)?.value;
+  const h12 = get('hour'), m = get('minute'), ampm = get('dayPeriod')?.toLowerCase();
+  document.getElementById('clock-time').textContent = `${h12}:${m} ${ampm}`;
+  document.getElementById('clock-date').textContent = `${get('weekday')}, ${get('month')} ${get('day')}`;
+  const hNum = parseInt(new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Manila', hour:'numeric', hour12:false}).format(now));
+  const secondsFraction = hNum/24;
+  const circumference = 289;
+  document.getElementById('clock-progress').setAttribute('stroke-dashoffset', circumference - (secondsFraction*circumference));
+  const emoji = hNum<6?'🌙':hNum<12?'🌸':hNum<18?'☀️':'🌙';
+  document.getElementById('clock-emoji').textContent = emoji;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ---- expenses (global) ----
+function getExpenses(){ try{ return JSON.parse(localStorage.getItem('expenses'))||[]; }catch(e){ return []; } }
+function saveExpenses(list){ localStorage.setItem('expenses', JSON.stringify(list)); }
+function addExpense(label, amount, sectionLabel){
+  const list = getExpenses();
+  list.push({date: todayStr(), label, amount: parseFloat(amount)||0, section: sectionLabel});
+  saveExpenses(list);
+}
+function getSavings(){ try{ return JSON.parse(localStorage.getItem('savings'))||[]; }catch(e){ return []; } }
+function saveSavingsList(list){ localStorage.setItem('savings', JSON.stringify(list)); }
+function addSaving(){
+  const val = parseFloat(document.getElementById('save-amount').value);
+  if(!val) return;
+  const platform = document.getElementById('save-platform').value;
+  const list = getSavings();
+  list.push({date: todayStr(), amount: val, platform: platform || null});
+  saveSavingsList(list);
+  document.getElementById('save-amount').value='';
+  renderBudget();
+  renderPlatforms();
+}
+
+function inPeriod(dateStr, period){
+  const d = new Date(dateStr+'T00:00:00');
+  const now = new Date();
+  if(period==='week'){
+    const dow = now.getDay();
+    const start = new Date(now); start.setDate(now.getDate()-dow); start.setHours(0,0,0,0);
+    const end = new Date(start); end.setDate(start.getDate()+7);
+    return d>=start && d<end;
+  }
+  if(period==='month'){
+    return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth();
+  }
+  if(period==='year'){
+    return d.getFullYear()===now.getFullYear();
+  }
+  return false;
+}
+
+let currentPeriod = 'week';
+let currentInvPeriod = 'week';
+function setPeriod(p){
+  currentPeriod = p;
+  document.querySelectorAll('.periodtab').forEach(el=>el.classList.toggle('active', el.dataset.period===p));
+  renderBudget();
+}
+
+function renderBudget(){
+  const weeklyBudget = parseFloat(document.getElementById('budget-weekly').value)||0;
+  const savingsGoal = parseFloat(document.getElementById('budget-goal').value)||0;
+  localStorage.setItem('budget-weekly-val', weeklyBudget);
+  localStorage.setItem('budget-goal-val', savingsGoal);
+
+  const expenses = getExpenses().filter(e => inPeriod(e.date, currentPeriod));
+  const savings = getSavings().filter(s => inPeriod(s.date, currentPeriod));
+  const spentTotal = expenses.reduce((a,e)=>a+e.amount,0);
+  const savedTotal = savings.reduce((a,s)=>a+s.amount,0);
+  const remaining = (currentPeriod==='week' ? weeklyBudget : currentPeriod==='month' ? weeklyBudget*4 : weeklyBudget*52) - spentTotal;
+
+  document.getElementById('budget-stats').innerHTML = `
+    <div class="stat"><span class="num">₱${spentTotal.toFixed(0)}</span><span class="lbl">spent this ${currentPeriod}</span></div>
+    <div class="stat"><span class="num">₱${savedTotal.toFixed(0)}</span><span class="lbl">saved this ${currentPeriod}</span></div>
+    <div class="stat"><span class="num">₱${remaining.toFixed(0)}</span><span class="lbl">remaining</span></div>
+  `;
+  document.getElementById('expense-list').innerHTML = expenses.slice().reverse().map(e=>`
+    <div class="expenseitem"><span>${e.label} <span class="exsec">(${e.section})</span></span><span>₱${e.amount.toFixed(0)}</span></div>
+  `).join('') || '<div style="font-size:.78rem;color:#b3a48c;">no expenses logged this '+currentPeriod+' yet</div>';
+}
+document.getElementById('budget-weekly').addEventListener('input', renderBudget);
+document.getElementById('budget-goal').addEventListener('input', renderBudget);
+
+// ---- generic tasks (with optional expense tagging) ----
+function getTasks(id){ try{ return JSON.parse(localStorage.getItem('tasks:'+id)) || []; }catch(e){ return []; } }
+function saveTasks(id, tasks){ localStorage.setItem('tasks:'+id, JSON.stringify(tasks)); }
+function allTasksFlat(){
+  let out = [];
+  const allIds = ['academic', ...sections.map(s=>s.id)];
+  allIds.forEach(id => getTasks(id).forEach((t,i) => out.push({...t, sectionId:id, idx:i})));
+  return out;
+}
+function renderTasks(id){
+  const tasks = getTasks(id);
+  const container = document.getElementById('list-'+id);
+  container.innerHTML = tasks.map((t,i) => `
+    <div class="task">
+      <input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${id}',${i})">
+      <span class="txt"><span class="${t.done?'done':''}">${t.text}</span>
+        <span class="meta">
+          ${t.due?`<span class="due">📅 ${t.due}</span>`:''}
+          ${t.subject?`<span class="badge subject">${t.subject}</span>`:''}
+          ${t.difficulty?`<span class="badge ${t.difficulty}">${t.difficulty}</span>`:''}
+          ${t.type?`<span class="badge type">${t.type}</span>`:''}
+          ${t.expenseAmount?`<span class="badge expense">₱${t.expenseAmount}</span>`:''}
+        </span>
+      </span>
+      <button class="del" onclick="deleteTask('${id}',${i})">×</button>
+    </div>
+  `).join('');
+}
+function addTask(id, sectionLabel){
+  const input = document.getElementById('input-'+id);
+  const dateInput = document.getElementById('date-'+id);
+  const expCheck = document.getElementById('exp-'+id);
+  const expAmount = document.getElementById('expamt-'+id);
+  const val = input.value.trim();
+  if(!val) return;
+  const tasks = getTasks(id);
+  const isExpense = expCheck && expCheck.checked;
+  const amount = isExpense ? parseFloat(expAmount.value)||0 : null;
+  tasks.push({text:val, done:false, due: dateInput.value || null, expenseAmount: amount});
+  saveTasks(id, tasks);
+  if(isExpense && amount) addExpense(val, amount, sectionLabel);
+  input.value=''; dateInput.value='';
+  if(expCheck){ expCheck.checked=false; expAmount.value=''; expAmount.style.display='none'; }
+  renderTasks(id); renderDashboard(); renderCalendar(); renderBudget(); renderInventory();
+}
+function toggleTask(id, idx){
+  const tasks = getTasks(id);
+  tasks[idx].done = !tasks[idx].done;
+  saveTasks(id, tasks);
+  renderTasks(id); renderDashboard(); renderCalendar();
+  if(id==='academic' && typeof renderAcademicTimeline==='function') renderAcademicTimeline();
+  if(selectedDate) renderDayPanel(selectedDate);
+}
+function deleteTask(id, idx){
+  const tasks = getTasks(id);
+  tasks.splice(idx,1);
+  saveTasks(id, tasks);
+  renderTasks(id); renderDashboard(); renderCalendar();
+  if(id==='academic' && typeof renderAcademicTimeline==='function') renderAcademicTimeline();
+  if(selectedDate) renderDayPanel(selectedDate);
+}
+function toggleExpenseField(id){
+  const box = document.getElementById('exp-'+id);
+  const amt = document.getElementById('expamt-'+id);
+  amt.style.display = box.checked ? 'inline-block' : 'none';
+}
+
+const listsDiv = document.getElementById('lists');
+sections.forEach(sec => {
+  const el = document.createElement('section');
+  el.id = 'sec-'+sec.id;
+  el.innerHTML = `
+    <span class="tag ${sec.tag}">${sec.tag}</span>
+    <h2>${sec.title}</h2>
+    <div class="tasklist" id="list-${sec.id}"></div>
+    <div class="addrow">
+      <input type="text" id="input-${sec.id}" placeholder="add a task...">
+      <input type="date" id="date-${sec.id}">
+    </div>
+    <div class="addrow">
+      <label class="exprow"><input type="checkbox" id="exp-${sec.id}" onchange="toggleExpenseField('${sec.id}')"> 💰 expense?</label>
+      <input type="number" id="expamt-${sec.id}" placeholder="₱ amount" style="display:none;">
+      <button onclick="addTask('${sec.id}', '${sec.title.replace(/'/g, "")}')">Add</button>
+    </div>
+  `;
+  listsDiv.appendChild(el);
+  renderTasks(sec.id);
+});
+
+// ---- academic (richer fields) ----
+function addAcademic(){
+  const subject = document.getElementById('acad-subject').value.trim();
+  const text = document.getElementById('acad-task').value.trim();
+  const deadline = document.getElementById('acad-deadline').value;
+  const difficulty = document.getElementById('acad-difficulty').value;
+  const type = document.getElementById('acad-type').value;
+  if(!text) return;
+  const tasks = getTasks('academic');
+  tasks.push({text, subject, due: deadline||null, difficulty, type, done:false});
+  saveTasks('academic', tasks);
+  document.getElementById('acad-subject').value='';
+  document.getElementById('acad-task').value='';
+  document.getElementById('acad-deadline').value='';
+  document.getElementById('acad-difficulty').value='';
+  document.getElementById('acad-type').value='';
+  renderTasks('academic'); renderDashboard(); renderCalendar(); renderAcademicTimeline();
+}
+renderTasks('academic');
+renderAcademicTimeline();
+
+function renderAcademicTimeline(){
+  const tasks = getTasks('academic').filter(t => t.due && !t.done);
+  const today = todayStr();
+  const sorted = tasks.slice().sort((a,b)=>a.due.localeCompare(b.due));
+  const el = document.getElementById('acad-timeline');
+  if(!el) return;
+  if(!sorted.length){
+    el.innerHTML = '<div style="font-size:.78rem;color:#b3a48c;">no upcoming deadlines yet</div>';
+    return;
+  }
+  el.innerHTML = '<div class="grouplabel" style="font-size:.78rem;color:var(--sage-dark);font-weight:700;margin-bottom:6px;">⏳ Upcoming Deadlines</div>' +
+    sorted.map(t => {
+      const daysLeft = Math.round((new Date(t.due+'T00:00:00') - new Date(today+'T00:00:00')) / 86400000);
+      const urgency = daysLeft<0 ? '#8a2f28' : daysLeft<=2 ? '#8a2f28' : daysLeft<=7 ? '#7a5c12' : '#3d5c2b';
+      const label = daysLeft<0 ? `${Math.abs(daysLeft)}d overdue` : daysLeft===0 ? 'due today' : `in ${daysLeft}d`;
+      return `<div class="expenseitem"><span>${t.subject?`[${t.subject}] `:''}${t.text} ${t.type?`<span class="badge type">${t.type}</span>`:''}</span><span style="color:${urgency};font-weight:700;">${t.due} · ${label}</span></div>`;
+    }).join('');
+}
+
+// ---- wellness (per-date) ----
+function getWellness(dateStr){ try{ return JSON.parse(localStorage.getItem('wellness:'+dateStr)) || {}; }catch(e){ return {}; } }
+function saveWellness(dateStr, data){ localStorage.setItem('wellness:'+dateStr, JSON.stringify(data)); }
+
+// ---- 75 Soft ----
+const softItems = [
+  {key:'sleep8', label:'Sleep 8 hours', tracked:true, unit:'hrs'},
+  {key:'bible', label:'Read 10 pages of the Bible'},
+  {key:'finance', label:'Learn finance for 1 hour', tracked:true, unit:'hrs'},
+  {key:'deepwork', label:'Deep work / studies (goal: 5 hrs)', tracked:true, unit:'hrs'},
+  {key:'nojunk', label:'No junk food or drinks'},
+  {key:'exercise', label:'Exercise at least 45 min', tracked:true, unit:'min'},
+  {key:'water', label:'Drink 3L water with DCTM', tracked:true, unit:'L'},
+];
+function getSoft(dateStr){ try{ return JSON.parse(localStorage.getItem('soft75:'+dateStr)) || {}; }catch(e){ return {}; } }
+function saveSoft(dateStr, data){ localStorage.setItem('soft75:'+dateStr, JSON.stringify(data)); }
+function renderSoftToday(){
+  const dateStr = todayStr();
+  document.getElementById('soft-date').textContent = dateStr;
+  renderSoftInto('soft-list', dateStr);
+}
+function renderSoftInto(containerId, dateStr){
+  const data = getSoft(dateStr);
+  const container = document.getElementById(containerId);
+  let html = '';
+  softItems.forEach(item => {
+    const checked = data[item.key+'_done'] ? 'checked' : '';
+    const val = data[item.key+'_val'] ?? '';
+    html += `<div class="soft-item">
+      <input type="checkbox" ${checked} onchange="updateSoft('${dateStr}','${item.key}_done', this.checked, '${containerId}')">
+      <span class="lbl2">${item.label}</span>
+      ${item.tracked ? `<input type="number" step="0.1" placeholder="0" value="${val}" onchange="updateSoft('${dateStr}','${item.key}_val', this.value, '${containerId}')"><span class="unit">${item.unit}</span>` : ''}
+    </div>`;
+  });
+  html += `<div class="subgroup"><div class="grouplabel">💊 Medication</div><div class="pillrow">
+    <label class="pillcheck"><input type="checkbox" ${data.med_antidep?'checked':''} onchange="updateSoft('${dateStr}','med_antidep', this.checked, '${containerId}')"> Antidepressant</label>
+    <label class="pillcheck"><input type="checkbox" ${data.med_antipsych?'checked':''} onchange="updateSoft('${dateStr}','med_antipsych', this.checked, '${containerId}')"> Antipsychotic</label>
+  </div></div>`;
+  html += `<div class="subgroup"><div class="grouplabel">🌿 Essential Greens (2 tabs, 3x/day)</div><div class="pillrow">
+    ${[1,2,3].map(n=>`<label class="pillcheck"><input type="checkbox" ${data['green_'+n]?'checked':''} onchange="updateSoft('${dateStr}','green_${n}', this.checked, '${containerId}')"> Meal ${n}</label>`).join('')}
+  </div></div>`;
+  html += `<div class="subgroup"><div class="grouplabel">🍊 Essential C (2 tabs, 3x/day)</div><div class="pillrow">
+    ${[1,2,3].map(n=>`<label class="pillcheck"><input type="checkbox" ${data['vitc_'+n]?'checked':''} onchange="updateSoft('${dateStr}','vitc_${n}', this.checked, '${containerId}')"> Meal ${n}</label>`).join('')}
+  </div></div>`;
+  container.innerHTML = html;
+}
+function updateSoft(dateStr, key, value, containerId){
+  const data = getSoft(dateStr);
+  data[key] = value;
+  saveSoft(dateStr, data);
+  renderDashboard(); renderCalendar();
+}
+
+// ---- dashboard ----
+function renderDashboard(){
+  let totalOpen = 0, totalDone = 0;
+  ['academic', ...sections.map(s=>s.id)].forEach(id => {
+    const tasks = getTasks(id);
+    totalOpen += tasks.filter(t=>!t.done).length;
+    totalDone += tasks.filter(t=>t.done).length;
+  });
+  const w = getWellness(todayStr());
+  const s = getSoft(todayStr());
+  const softDoneCount = softItems.filter(i => s[i.key+'_done']).length;
+  document.getElementById('dash-stats').innerHTML = `
+    <div class="stat"><span class="num">${totalOpen}</span><span class="lbl">open tasks</span></div>
+    <div class="stat"><span class="num">${totalDone}</span><span class="lbl">done</span></div>
+    <div class="stat"><span class="num">${softDoneCount}/${softItems.length}</span><span class="lbl">75 soft today</span></div>
+    <div class="stat"><span class="num">${w.meals ?? '–'}</span><span class="lbl">meals today</span></div>
+  `;
+  document.getElementById('dash-nav').innerHTML = [{id:'academic',title:'📖 Academic'},...sections].map(sec =>
+    `<a class="navpill" href="#sec-${sec.id}">${sec.title.split(' ')[0]}</a>`
+  ).join('') + `<a class="navpill" href="#sec-soft75" style="background:var(--sage-dark);">🌷</a><a class="navpill" href="#sec-money" style="background:#B98C6B;">🍯</a>`;
+}
+
+// ---- calendar ----
+let calYear, calMonth, selectedDate = null;
+let mealWeekOffset = 0;
+const meals = ['Breakfast','Lunch','Dinner'];
+(function initCal(){ const t = new Date(); calYear = t.getFullYear(); calMonth = t.getMonth(); })();
+function changeMonth(delta){
+  calMonth += delta;
+  if(calMonth<0){ calMonth=11; calYear--; }
+  if(calMonth>11){ calMonth=0; calYear++; }
+  renderCalendar();
+}
+function renderCalendar(){
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  document.getElementById('cal-label').textContent = `${monthNames[calMonth]} ${calYear}`;
+  const grid = document.getElementById('cal-grid');
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const dows = ['S','M','T','W','T','F','S'];
+  let html = dows.map(d=>`<div class="dow">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) html += `<div class="calday empty"></div>`;
+  const flatTasks = allTasksFlat();
+  for(let d=1; d<=daysInMonth; d++){
+    const dateStr = `${calYear}-${pad(calMonth+1)}-${pad(d)}`;
+    const hasWellness = !!localStorage.getItem('wellness:'+dateStr);
+    const hasTaskDue = flatTasks.some(t => t.due === dateStr);
+    const hasSoft = !!localStorage.getItem('soft75:'+dateStr);
+    const isToday = dateStr === todayStr();
+    const isSelected = dateStr === selectedDate;
+    let cls = 'calday';
+    if(isToday) cls += ' today';
+    if(isSelected) cls += ' selected';
+    html += `<div class="${cls}" onclick="selectDate('${dateStr}')">${d}
+      <div class="dots">${hasWellness?'<span class="dot w"></span>':''}${hasTaskDue?'<span class="dot t"></span>':''}${hasSoft?'<span class="dot s"></span>':''}</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+function selectDate(dateStr){
+  selectedDate = dateStr;
+  renderCalendar();
+  renderDayPanel(dateStr);
+}
+function renderDayPanel(dateStr){
+  const w = getWellness(dateStr);
+  const flatTasks = allTasksFlat().filter(t => t.due === dateStr);
+  const panel = document.getElementById('daypanel');
+  panel.innerHTML = `
+    <div class="daypanel">
+      <h3>${dateStr}</h3>
+      <div class="wellrow"><label>Meals eaten</label><input type="number" id="pw-meals" min="0" max="6" value="${w.meals ?? ''}"></div>
+      <div class="wellrow"><label>Sleep (hrs)</label><input type="number" id="pw-sleep" min="0" max="14" value="${w.sleep ?? ''}"></div>
+      <div class="wellrow"><label>Anxiety (1–10)</label><input type="number" id="pw-anx" min="1" max="10" value="${w.anx ?? ''}"></div>
+      <div class="wellrow"><label>How I felt</label><input type="text" id="pw-note" value="${w.note ?? ''}"></div>
+      ${flatTasks.length ? `<div style="margin-top:8px;"><span style="font-size:.75rem;color:#9a8b78;">Tasks due this day:</span>${flatTasks.map(t=>`<div class="task"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${t.sectionId}',${t.idx})"><span class="txt"><span class="${t.done?'done':''}">${t.text}</span></span></div>`).join('')}</div>` : ''}
+      <div style="margin-top:10px;"><span style="font-size:.75rem;color:#9a8b78;">75 Soft this day:</span></div>
+      <div id="daypanel-soft"></div>
+    </div>
+  `;
+  renderSoftInto('daypanel-soft', dateStr);
+  ['pw-meals','pw-sleep','pw-anx','pw-note'].forEach(fid => {
+    document.getElementById(fid).addEventListener('input', () => {
+      const d = {
+        meals: document.getElementById('pw-meals').value,
+        sleep: document.getElementById('pw-sleep').value,
+        anx: document.getElementById('pw-anx').value,
+        note: document.getElementById('pw-note').value,
+      };
+      saveWellness(dateStr, d);
+      renderDashboard(); renderCalendar();
+    });
+  });
+}
+
+// braindump
+const inbox = document.getElementById('inbox');
+inbox.value = localStorage.getItem('inbox') || '';
+inbox.addEventListener('input', () => localStorage.setItem('inbox', inbox.value));
+
+// init budget fields from storage
+const storedWeekly = localStorage.getItem('budget-weekly-val');
+const storedGoal = localStorage.getItem('budget-goal-val');
+if(storedWeekly) document.getElementById('budget-weekly').value = storedWeekly;
+if(storedGoal) document.getElementById('budget-goal').value = storedGoal;
+
+renderSoftToday();
+renderDashboard();
+renderCalendar();
+selectDate(todayStr());
+renderBudget();
+renderPlatforms();
+renderMealPlan();
+renderHoldings();
+renderAssets();
+renderInventory();
+renderStock();
+
+// snack log
+const snacklog = document.getElementById('snacklog');
+snacklog.value = localStorage.getItem('snacklog') || '';
+snacklog.addEventListener('input', () => localStorage.setItem('snacklog', snacklog.value));
+
+// ---- meal planning (real weeks, navigable, date-keyed) ----
+function getMealPlan(){ try{ return JSON.parse(localStorage.getItem('mealplan'))||{}; }catch(e){ return {}; } }
+function saveMealPlan(data){ localStorage.setItem('mealplan', JSON.stringify(data)); }
+function getWeekDates(offset){
+  const today = new Date(todayStr()+'T00:00:00');
+  const dow = today.getDay(); // 0=Sun
+  const diffToMonday = dow===0 ? -6 : 1-dow;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() + diffToMonday + (offset*7));
+  const dates = [];
+  for(let i=0;i<7;i++){
+    const d = new Date(monday);
+    d.setDate(monday.getDate()+i);
+    dates.push(`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`);
+  }
+  return dates;
+}
+function changeMealWeek(delta){
+  mealWeekOffset += delta;
+  renderMealPlan();
+}
+function renderMealPlan(){
+  const dates = getWeekDates(mealWeekOffset);
+  const plan = getMealPlan();
+  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  document.getElementById('mealweek-label').textContent = `${dates[0]} – ${dates[6]}`;
+  const container = document.getElementById('mealplan-grid');
+  container.innerHTML = dates.map((dateStr, i) => {
+    const dayData = plan[dateStr] || {};
+    const isToday = dateStr === todayStr();
+    return `<div class="budgetbox" style="margin-bottom:8px;${isToday?'border-color:var(--sage);border-width:2px;':''}">
+      <div style="font-weight:700;color:var(--sage-dark);font-size:.88rem;margin-bottom:6px;">${dayNames[i]} <span style="font-size:.7rem;color:#9a8b78;">${dateStr}</span></div>
+      ${meals.map(m => {
+        const md = dayData[m] || {};
+        return `<div class="soft-item" style="padding:5px 0;">
+          <input type="checkbox" ${md.eaten?'checked':''} onchange="updateMeal('${dateStr}','${m}','eaten', this.checked)">
+          <span class="unit" style="width:60px;min-width:60px;">${m}</span>
+          <input type="text" value="${md.text||''}" placeholder="plan..." style="flex:1;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:.8rem;" onchange="updateMeal('${dateStr}','${m}','text', this.value)">
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+}
+function updateMeal(dateStr, mealType, field, value){
+  const plan = getMealPlan();
+  if(!plan[dateStr]) plan[dateStr] = {};
+  if(!plan[dateStr][mealType]) plan[dateStr][mealType] = {};
+  plan[dateStr][mealType][field] = value;
+  saveMealPlan(plan);
+}
+
+// ---- portfolio holdings ----
+function getHoldings(){ try{ return JSON.parse(localStorage.getItem('holdings'))||[]; }catch(e){ return []; } }
+function saveHoldings(list){ localStorage.setItem('holdings', JSON.stringify(list)); }
+function addHolding(){
+  const asset = document.getElementById('holding-asset').value.trim();
+  const type = document.getElementById('holding-type').value;
+  const invested = parseFloat(document.getElementById('holding-invested').value);
+  const current = parseFloat(document.getElementById('holding-current').value);
+  if(!asset || isNaN(invested) || isNaN(current)) return;
+  const list = getHoldings();
+  list.push({asset, type, invested, current});
+  saveHoldings(list);
+  document.getElementById('holding-asset').value='';
+  document.getElementById('holding-invested').value='';
+  document.getElementById('holding-current').value='';
+  renderHoldings();
+}
+function deleteHolding(idx){
+  const list = getHoldings();
+  list.splice(idx,1);
+  saveHoldings(list);
+  renderHoldings();
+}
+function renderHoldings(){
+  const holdings = getHoldings();
+  const container = document.getElementById('holdings-list');
+  if(container){
+    if(!holdings.length){
+      container.innerHTML = '<div style="font-size:.78rem;color:#b3a48c;">no holdings added yet</div>';
+    } else {
+      container.innerHTML = holdings.map((h, idx) => {
+        const gain = h.current - h.invested;
+        const gainPct = h.invested ? (gain/h.invested*100) : 0;
+        const gainColor = gain >= 0 ? '#3d5c2b' : '#8a2f28';
+        return `<div class="budgetbox" style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:700;font-size:.88rem;">${h.asset} <span style="font-size:.68rem;color:#9a8b78;">(${h.type})</span></div>
+            <div style="font-size:.78rem;">Invested ₱${h.invested.toFixed(2)} → Now ₱${h.current.toFixed(2)}</div>
+            <div style="font-size:.75rem;color:${gainColor};font-weight:700;">${gain>=0?'+':''}₱${gain.toFixed(2)} (${gainPct.toFixed(1)}%)</div>
+          </div>
+          <button class="del" onclick="deleteHolding(${idx})">×</button>
+        </div>`;
+      }).join('');
+    }
+  }
+  renderInvestmentSummary();
+}
+function renderInvestmentSummary(){
+  const holdings = getHoldings();
+  const platforms = getPlatforms();
+  const savings = getSavings();
+  const assets = getAssets();
+  const holdingsInvested = holdings.reduce((a,h)=>a+h.invested,0);
+  const holdingsCurrent = holdings.reduce((a,h)=>a+h.current,0);
+  const platformsBalance = platforms.reduce((a,p)=>a+savings.filter(s=>s.platform===p.name).reduce((x,s)=>x+s.amount,0),0);
+  const assetsCurrent = assets.reduce((a,x)=>a+x.currentValue,0);
+  const totalGain = holdingsCurrent - holdingsInvested;
+  const netWorth = holdingsCurrent + platformsBalance + assetsCurrent;
+  const el = document.getElementById('inv-summary');
+  if(el){
+    el.innerHTML = `
+      <div class="stat"><span class="num">₱${netWorth.toFixed(0)}</span><span class="lbl">net worth (all)</span></div>
+      <div class="stat"><span class="num">₱${platformsBalance.toFixed(0)}</span><span class="lbl">savings platforms</span></div>
+      <div class="stat"><span class="num" style="color:${totalGain>=0?'#3d5c2b':'#8a2f28'}">${totalGain>=0?'+':''}₱${totalGain.toFixed(0)}</span><span class="lbl">holdings gain/loss</span></div>
+      <div class="stat"><span class="num">₱${assetsCurrent.toFixed(0)}</span><span class="lbl">assets current value</span></div>
+    `;
+  }
+}
+
+// ---- depreciating assets ----
+function getAssets(){ try{ return JSON.parse(localStorage.getItem('assets'))||[]; }catch(e){ return []; } }
+function saveAssets(list){ localStorage.setItem('assets', JSON.stringify(list)); }
+function addAsset(){
+  const name = document.getElementById('asset-name').value.trim();
+  const purchaseDate = document.getElementById('asset-purchase-date').value;
+  const purchasePrice = parseFloat(document.getElementById('asset-purchase-price').value);
+  const currentValue = parseFloat(document.getElementById('asset-current-value').value);
+  if(!name || isNaN(purchasePrice) || isNaN(currentValue)) return;
+  const list = getAssets();
+  list.push({name, purchaseDate, purchasePrice, currentValue});
+  saveAssets(list);
+  document.getElementById('asset-name').value='';
+  document.getElementById('asset-purchase-date').value='';
+  document.getElementById('asset-purchase-price').value='';
+  document.getElementById('asset-current-value').value='';
+  renderAssets();
+}
+function deleteAsset(idx){
+  const list = getAssets();
+  list.splice(idx,1);
+  saveAssets(list);
+  renderAssets();
+}
+function renderAssets(){
+  const assets = getAssets();
+  const container = document.getElementById('assets-list');
+  if(container){
+    if(!assets.length){
+      container.innerHTML = '<div style="font-size:.78rem;color:#b3a48c;">no assets added yet</div>';
+    } else {
+      container.innerHTML = assets.map((a, idx) => {
+        const loss = a.purchasePrice - a.currentValue;
+        const lossPct = a.purchasePrice ? (loss/a.purchasePrice*100) : 0;
+        return `<div class="budgetbox" style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:700;font-size:.88rem;">${a.name}</div>
+            <div style="font-size:.7rem;color:#9a8b78;">bought ${a.purchaseDate||'–'} for ₱${a.purchasePrice.toFixed(2)}</div>
+            <div style="font-size:.78rem;">Now worth ₱${a.currentValue.toFixed(2)}</div>
+            <div style="font-size:.75rem;color:#8a2f28;font-weight:700;">-₱${loss.toFixed(2)} (${lossPct.toFixed(1)}% depreciated)</div>
+          </div>
+          <button class="del" onclick="deleteAsset(${idx})">×</button>
+        </div>`;
+      }).join('');
+    }
+  }
+  renderInvestmentSummary();
+}
+
+// ---- inventory (income + expense ledger) ----
+function getIncome(){ try{ return JSON.parse(localStorage.getItem('income'))||[]; }catch(e){ return []; } }
+function saveIncome(list){ localStorage.setItem('income', JSON.stringify(list)); }
+function addIncome(){
+  const label = document.getElementById('income-label').value.trim();
+  const category = document.getElementById('income-category').value;
+  const amount = parseFloat(document.getElementById('income-amount').value);
+  if(!label || !amount) return;
+  const list = getIncome();
+  list.push({date: todayStr(), label, category, amount});
+  saveIncome(list);
+  document.getElementById('income-label').value='';
+  document.getElementById('income-amount').value='';
+  renderInventory();
+}
+function setInvPeriod(p){
+  currentInvPeriod = p;
+  document.querySelectorAll('[data-invperiod]').forEach(el=>el.classList.toggle('active', el.dataset.invperiod===p));
+  renderInventory();
+}
+function renderInventory(){
+  const income = getIncome().filter(i => inPeriod(i.date, currentInvPeriod));
+  const expenses = getExpenses().filter(e => inPeriod(e.date, currentInvPeriod));
+  const totalIn = income.reduce((a,i)=>a+i.amount,0);
+  const totalOut = expenses.reduce((a,e)=>a+e.amount,0);
+  const net = totalIn - totalOut;
+
+  document.getElementById('inv-ledger-summary').innerHTML = `
+    <div class="stat"><span class="num" style="color:#3d5c2b;">₱${totalIn.toFixed(0)}</span><span class="lbl">in this ${currentInvPeriod}</span></div>
+    <div class="stat"><span class="num" style="color:#8a2f28;">₱${totalOut.toFixed(0)}</span><span class="lbl">out this ${currentInvPeriod}</span></div>
+    <div class="stat"><span class="num">₱${net.toFixed(0)}</span><span class="lbl">net</span></div>
+  `;
+
+  const byCategory = {};
+  expenses.forEach(e => { byCategory[e.section] = (byCategory[e.section]||0) + e.amount; });
+  const catHtml = Object.keys(byCategory).map(cat =>
+    `<div class="expenseitem"><span>${cat}</span><span>₱${byCategory[cat].toFixed(0)} out</span></div>`
+  ).join('') || '<div style="font-size:.78rem;color:#b3a48c;">no expenses tagged this '+currentInvPeriod+'</div>';
+  document.getElementById('inv-category-breakdown').innerHTML = `<div style="font-size:.78rem;color:#9a8b78;margin-bottom:4px;">By category (out) — this ${currentInvPeriod}:</div>${catHtml}`;
+
+  const combined = [
+    ...income.map(i => ({...i, kind:'in', tag:i.category})),
+    ...expenses.map(e => ({...e, kind:'out', tag:e.section}))
+  ].sort((a,b)=> b.date.localeCompare(a.date));
+  document.getElementById('inv-full-ledger').innerHTML = combined.map(item => `
+    <div class="expenseitem">
+      <span>${item.kind==='in'?'💵':'💸'} ${item.label} <span class="exsec">(${item.tag} · ${item.date})</span></span>
+      <span style="color:${item.kind==='in'?'#3d5c2b':'#8a2f28'};">${item.kind==='in'?'+':'-'}₱${item.amount.toFixed(0)}</span>
+    </div>
+  `).join('') || '<div style="font-size:.78rem;color:#b3a48c;">nothing logged this '+currentInvPeriod+'</div>';
+}
+
+// ---- physical stock/items tracking ----
+function getStockItems(){ try{ return JSON.parse(localStorage.getItem('stockItems'))||[]; }catch(e){ return []; } }
+function saveStockItems(list){ localStorage.setItem('stockItems', JSON.stringify(list)); }
+function addStockItem(){
+  const name = document.getElementById('stock-name').value.trim();
+  const category = document.getElementById('stock-category').value;
+  const qty = parseFloat(document.getElementById('stock-qty').value);
+  const unit = document.getElementById('stock-unit').value.trim() || 'pcs';
+  const price = parseFloat(document.getElementById('stock-price').value);
+  if(!name || isNaN(qty)) return;
+  const list = getStockItems();
+  list.push({id: Date.now(), name, category, unit, purchaseDate: todayStr(), quantityPurchased: qty, used: []});
+  saveStockItems(list);
+  if(!isNaN(price) && price>0){
+    addExpense(name+' (stock)', price, category);
+    renderInventory(); renderBudget();
+  }
+  document.getElementById('stock-name').value='';
+  document.getElementById('stock-qty').value='';
+  document.getElementById('stock-unit').value='';
+  document.getElementById('stock-price').value='';
+  renderStock();
+}
+function logStockUsage(itemId){
+  const input = document.getElementById('use-'+itemId);
+  const amount = parseFloat(input.value);
+  if(!amount) return;
+  const list = getStockItems();
+  const item = list.find(i => i.id === itemId);
+  if(item){
+    item.used.push({date: todayStr(), qty: amount});
+    saveStockItems(list);
+  }
+  input.value='';
+  renderStock();
+}
+function deleteStockItem(itemId){
+  let list = getStockItems();
+  list = list.filter(i => i.id !== itemId);
+  saveStockItems(list);
+  renderStock();
+}
+function renderStock(){
+  const items = getStockItems();
+  const container = document.getElementById('stock-list');
+  if(!container) return;
+  if(!items.length){
+    container.innerHTML = '<div style="font-size:.78rem;color:#b3a48c;">no items tracked yet — add one below</div>';
+    return;
+  }
+  container.innerHTML = items.map(item => {
+    const usedTotal = item.used.reduce((a,u)=>a+u.qty,0);
+    const remaining = item.quantityPurchased - usedTotal;
+    const todayUsed = item.used.filter(u=>u.date===todayStr()).reduce((a,u)=>a+u.qty,0);
+    const pct = item.quantityPurchased ? Math.max(0, remaining/item.quantityPurchased*100) : 0;
+    const barColor = pct<20 ? '#8a2f28' : pct<50 ? '#7a5c12' : '#3d5c2b';
+    return `<div class="budgetbox" style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-weight:700;font-size:.88rem;">${item.name} <span style="font-size:.68rem;color:#9a8b78;">(${item.category})</span></div>
+          <div style="font-size:.78rem;color:var(--sage-dark);">Remaining: ${remaining} ${item.unit} <span style="color:#9a8b78;">of ${item.quantityPurchased} bought</span></div>
+          ${todayUsed ? `<div style="font-size:.7rem;color:#9a8b78;">used ${todayUsed} ${item.unit} today</div>` : ''}
+          <div style="background:#E4D9C4;height:6px;border-radius:4px;margin-top:5px;width:150px;"><div style="background:${barColor};height:6px;border-radius:4px;width:${pct}%;"></div></div>
+        </div>
+        <button class="del" onclick="deleteStockItem(${item.id})">×</button>
+      </div>
+      <div class="addrow" style="margin-top:8px;">
+        <input type="number" id="use-${item.id}" placeholder="used today (${item.unit})">
+        <button onclick="logStockUsage(${item.id})">Log Use</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ---- savings platforms ----
+function getPlatforms(){ try{ return JSON.parse(localStorage.getItem('platforms'))||[]; }catch(e){ return []; } }
+function savePlatforms(list){ localStorage.setItem('platforms', JSON.stringify(list)); }
+function addPlatform(){
+  const name = document.getElementById('platform-name').value.trim();
+  const rate = parseFloat(document.getElementById('platform-rate').value);
+  const freq = document.getElementById('platform-freq').value;
+  const startAmount = parseFloat(document.getElementById('platform-amount').value);
+  if(!name || isNaN(rate)) return;
+  const list = getPlatforms();
+  list.push({name, rate, freq});
+  savePlatforms(list);
+  if(!isNaN(startAmount) && startAmount>0){
+    const savingsList = getSavings();
+    savingsList.push({date: todayStr(), amount: startAmount, platform: name});
+    saveSavingsList(savingsList);
+  }
+  document.getElementById('platform-name').value='';
+  document.getElementById('platform-rate').value='';
+  document.getElementById('platform-amount').value='';
+  renderPlatforms();
+  renderBudget();
+}
+function deletePlatform(idx){
+  const list = getPlatforms();
+  list.splice(idx,1);
+  savePlatforms(list);
+  renderPlatforms();
+}
+function renderPlatforms(){
+  const platforms = getPlatforms();
+  const savings = getSavings();
+
+  // update the platform dropdown in the Money section
+  const select = document.getElementById('save-platform');
+  if(select){
+    const currentVal = select.value;
+    select.innerHTML = '<option value="">General (no platform)</option>' +
+      platforms.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+    select.value = currentVal;
+  }
+
+  const container = document.getElementById('platform-list');
+  if(!container) return;
+  if(!platforms.length){
+    container.innerHTML = '<div style="font-size:.78rem;color:#b3a48c;">no platforms added yet — add one below</div>';
+    return;
+  }
+  container.innerHTML = platforms.map((p, idx) => {
+    const balance = savings.filter(s => s.platform === p.name).reduce((a,s)=>a+s.amount,0);
+    const interestPerYear = balance * (p.rate/100);
+    const interestPerMonth = interestPerYear / 12;
+    const shown = p.freq === 'monthly' ? interestPerMonth : interestPerYear;
+    const shownLabel = p.freq === 'monthly' ? 'est. ₱'+shown.toFixed(2)+' / month' : 'est. ₱'+shown.toFixed(2)+' / year';
+    return `
+      <div class="budgetbox" style="margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:700;font-size:.88rem;color:var(--brown);">${p.name} <span style="font-size:.7rem;color:#9a8b78;">(${p.rate}% ${p.freq})</span></div>
+            <div style="font-size:.8rem;color:var(--sage-dark);">Balance: ₱${balance.toFixed(2)}</div>
+            <div style="font-size:.72rem;color:#9a8b78;">${shownLabel}</div>
+          </div>
+          <button class="del" onclick="deletePlatform(${idx})">×</button>
+        </div>
+        <div class="addrow" style="margin-top:8px;">
+          <input type="number" id="quickadd-${idx}" placeholder="₱ add to ${p.name}">
+          <button onclick="quickAddToPlatform('${p.name}', ${idx})">Add</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+  renderInvestmentSummary();
+}
+function quickAddToPlatform(platformName, idx){
+  const input = document.getElementById('quickadd-'+idx);
+  const val = parseFloat(input.value);
+  if(!val) return;
+  const list = getSavings();
+  list.push({date: todayStr(), amount: val, platform: platformName});
+  saveSavingsList(list);
+  renderPlatforms();
+  renderBudget();
+}
+
+// ---- export / import ----
+function exportData(){
+  const data = {};
+  for(let i=0;i<localStorage.length;i++){
+    const key = localStorage.key(i);
+    data[key] = localStorage.getItem(key);
+  }
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'life-os-backup-'+todayStr()+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function importData(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const data = JSON.parse(e.target.result);
+      Object.keys(data).forEach(key => localStorage.setItem(key, data[key]));
+      alert('Imported! Reloading your data now.');
+      location.reload();
+    }catch(err){
+      alert('Hmm, that file did not load right. Make sure it is a backup exported from this same planner.');
+    }
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>
